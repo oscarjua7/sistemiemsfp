@@ -1,0 +1,7 @@
+Flask
+Pillow
+Sqlalchemy
+Flask-Login
+Flask-Session
+Flask-WTF
+fpdf
