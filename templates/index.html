@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block headers %}
+{% extends 'base.html' %}
+{% block headers %}
 <title>Sistema Integral IEMSFP</title>
 {% endblock %} 
 {% block contenido%}
@@ -29,7 +30,7 @@
                 <a href="{{ url_for('docentes') }}">Docentes</a>
               </li>
               <li>
-                <a href="{{ url_for('docentes') }}">Personal administrativo</a>
+                <a href="{{ url_for('personal_administrativo') }}">Personal administrativo</a>
               </li>
             </ul>
       </li>
@@ -42,31 +43,39 @@
                 <a href="{{ url_for('admin_carreras') }}">Carreras</a>
               </li>
               <li>
+                <a href="{{ url_for('admin_cuatrimestres') }}">Cuatrimestres</a>
+              </li>
+              <li>
                 <a href="{{ url_for('admin_grupos') }}">Grupos</a>
               </li>
-              <li>
-                <a href="#">Periodos</a>
-              </li>
-              <li>
-                <a href="#">Ciclos escolares</a>
-              </li>
             </ul>
+      </li>
       <li class="dropdown">
         <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+          <i class="material-icons">format_list_numbered</i><span>Materias</span>
+        </a>
+            <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+              <li>
+                <a href="{{ url_for('admin_materias') }}">Lista de materias</a>
+              </li>
+            </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
           <i class="material-icons">donut_small</i><span>Reportes</span>
         </a>
-        <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+        <ul class="collapse list-unstyled menu" id="pageSubmenu4">
           <li>
             <a href="{{ url_for('reportes') }}">Reporte de estatus</a>
-            <a href="#">Reporte alumnos por sexo</a>
+            <a href="{{ url_for('reportes_sexo') }}">Reporte alumnos por sexo</a>
           </li>
         </ul>
       </li>
       <li class="dropdown">
-        <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
           <i class="material-icons">border_color</i><span>Usuarios</span>
         </a>
-          <ul class="collapse list-unstyled menu" id="pageSubmenu4">
+          <ul class="collapse list-unstyled menu" id="pageSubmenu5">
             <li>
               <a href="{{ url_for('form_usuarios') }}">Administrar Usuarios</a>
             </li>
@@ -114,18 +123,6 @@
                     </a>
                     <ul class="dropdown-menu small-menu">
                       <li>
-                        <a href="#">
-                          <span class="material-icons">person_outline</span
-                          >Perfil
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#"
-                          ><span class="material-icons">settings</span
-                          >Configuración</a
-                        >
-                      </li>
-                      <li>
                         <a href="{{ url_for('logout') }}"
                           ><span class="material-icons">logout</span>Cerrar
                           sesión</a
@@ -142,87 +139,84 @@
         <!-- End XP Row -->
       </div>
     </div>
+
     <div class="container">
-      <div class="row justify-content-center mt-4">
-        <div class="col-lg-9">
-          <div class="xp-searchbar">
+      <div class="content">
+        <div class="cards">
+          <div class="card">
+            <div class="box">
+              <h1 style="font-size: 26px;">{{ total_records_alumn }}</h1>
+              <h3 style="font-size: 28px;">Estudiantes</h3>
+            </div>
+            <div class="icon-case mb-3">
+              <img src="{{ url_for('static', filename='img/icono_alumno.png') }}" width="40em" class="img-fluid"/>
+            </div>
+          </div>
+          <div class="card">
+            <div class="box">
+              <h1 style="font-size: 26px;">{{ total_records_docen }}</h1>
+              <h3 style="font-size: 28px;">Docentes</h3>
+            </div>
+            <div class="icon-case mb-3">
+              <img src="{{ url_for('static', filename='img/icono_docente.png') }}" width="40em" class="img-fluid"/>
+            </div>
+          </div>
+          <div class="card">
+            <div class="box">
+              <h1 style="font-size: 26px;">{{ total_records_per }}</h1>
+              <h3 style="font-size: 28px;">Administrativos</h3>
+            </div>
+            <div class="icon-case mb-3">
+              <img src="{{ url_for('static', filename='img/icono_personal_administrativo.png') }}" width="40em" class="img-fluid"/>
+            </div>
+          </div>
+          <div class="card">
+            <div class="box">
+              <h1 style="font-size: 26px;">{{ total_records_carreras }}</h1>
+              <h3 style="font-size: 28px;">Carreras</h3>
+            </div>
+            <div class="icon-case mb-3">
+              <img src="{{ url_for('static', filename='img/icon_carreras.png') }}" width="40em" class="img-fluid"/>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="main-content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-            <div class="col">
-              <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                  <h5 class="my-0 fw-normal">Alumnos</h5>
-                </div>
-                <div class="card-body">
-                  <img
-                    src="{{ url_for('static', filename='img/icono_alumno.png') }}"
-                    width="300em"
-                    class="img-fluid"
-                  />
-                  <a href="{{ url_for('alumnos') }}" class="w-100 btn btn-lg btn-outline-primary">
-                    Ver Registros</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                  <h5 class="my-0 fw-normal">Docentes</h5>
-                </div>
-                <div class="card-body">
-                  <img
-                    src="{{ url_for('static', filename='img/icono_docente.png') }}"
-                    width="300em"
-                    class="img-fluid"
-                  />
-                  <a href="{{ url_for('docentes') }}" class="w-100 btn btn-lg btn-outline-primary">
-                    Ver Registros</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                  <h5 class="my-0 fw-normal">Personal administrativo</h5>
-                </div>
-                <div class="card-body">
-                  <img
-                    src="{{ url_for('static', filename='img/icono_personal_administrativo.png') }}"
-                    width="300em"
-                    class="img-fluid"
-                  />
-                  <a href="{{ url_for('personal') }}" class="w-100 btn btn-lg btn-outline-primary">
-                    Ver Registros</a>
-                </div>
-              </div>
+      <div class="row justify-content-center ">
+        <!-- Primera parte -->
+        <div class="col-md-6 mb-5"> <!-- Aquí inicia la primera columna (6 reguillas) -->
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <h4 class="text-center mt-3">Respaldo de Base de Datos</h4>
             </div>
           </div>
-        </div>
-        <!-- Edit Modal HTML -->
+          <div class="row justify-content-center mt-3 mb-2">
 
-        <!-- Edit Modal HTML -->
-
-        <!-- Delete Modal HTML -->
+            <p class="mb-4" >Haz clic en el botón para realizar el respaldo y descargarlo:</p>
+        
+            <form class="mb-5" action="/respaldo" method="GET">
+                <button type="submit" class="btn btn-success">Realizar Respaldo y Descargar</button>
+            </form>
+          </div>
+        </div> <!-- Aquí finaliza la primera columna (6 reguillas) -->
+    
+        <!-- Segunda parte (para la segunda gráfica) -->
+        <!-- Agrega la segunda gráfica aquí (siguiendo una estructura similar) -->
+    
       </div>
     </div>
+    
+         
 
-    <footer class="footer">
-      <div class="container-fluid">
-        <div class="footer-in">
-          <p class="mb-0">
-            &copy 2023 Sistema integral de información - IEMSFP
-          </p>
-        </div>
-      </div>
-    </footer>
+    {% include 'footer.html' %}
+
   </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% include 'graficas/egresados-barra.html' %}
+{% include 'graficas/egresados-pie.html' %}
+{% include 'graficas/egresados-barra-sexo.html' %}
+{% include 'graficas/egresados-pie-sexo.html' %}
 {% endblock %}

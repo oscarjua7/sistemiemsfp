@@ -1,0 +1,33 @@
+<div class="col-md-8">
+    <form action="{{ url_for('admin_cuatrimestres') }}" method="post" class="mb-3">
+        <div class="input-group mb-3">
+            <input name="nombre" type="text" class="form-control" placeholder="Nombre del cuatrimestre" required>
+            <button class="btn btn-outline-primary" type="submit">Registrar <i class="bi bi-arrow-right"></i></button>
+        </div>
+    </form>
+    <div class="table-responsive mt-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cuatrimestre in cuatrimestres %}
+                    <tr>
+                        <th scope="col">{{ cuatrimestre.id }}</th>
+                        <td>{{ cuatrimestre.nombre }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#actualizar-cuatrimestre-modal-{{ cuatrimestre.id }}"><i class="bi bi-pencil"></i> Actualizar</button>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#eliminar-cuatrimestre-modal-{{ cuatrimestre.id }}"><i class="bi bi-trash"></i> Eliminar</button>
+                        </td>
+                    </tr>
+                    {% include 'cuatrimestres/eliminar-cuatrimestre-modal.html' %}
+                    {% include 'cuatrimestres/actualizar-cuatrimestre-modal.html' %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

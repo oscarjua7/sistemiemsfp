@@ -8,10 +8,49 @@ body,html{
 }
 
 
+
+@media print {
+    .row.justify-content-center {
+        text-align: center;
+    }
+
+    .col-md-6 {
+        display: inline-block; /* Otra opción es 'display: inline' */
+    }
+
+    canvas {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto; /* Centrar horizontalmente */
+    }
+}
+
 /*==========================================================
   material-icon font-style
   ================================*/
 
+.container .content{
+	position: relative;
+}
+
+.container .content .cards{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.container .content .cards .card{
+	width: 236px;
+	height: 150px;
+	background: white;
+	margin: 20px 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
 @font-face {
   font-family: 'Material Icons';

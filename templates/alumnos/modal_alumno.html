@@ -25,19 +25,19 @@
                                         <h5> Estatus</h5>
                                         <p>
                                             {% if alumno.estatus == 0 %}
-                                                <h6 >Activo</h6>
+                                                <h6 class="badge bg-success text-light" style="font-size: 14px;">Activo</h6>
                                             {% elif alumno.estatus == 1 %}
-                                                <h6>Pendiente</h6>
+                                                <h6 class="badge bg-warning text-light" style="font-size: 14px;">Pendiente</h6>
                                             {% elif alumno.estatus == 2 %}
-                                                <h6>Baja</h6>
+                                                <h6 class="badge bg-danger text-light" style="font-size: 14px;">Baja</h6>
                                             {% else %}
-                                                <h6>Graduado</h6>
+                                                <h6 class="badge bg-secondary text-light" style="font-size: 14px;">Graduado</h6>
                                             {% endif %}
                                         </p>
                                     </div>
                                     <div class="col-md-6">
-                                        <h5>Carrera</h5>
-                                        <h6>{{ alumno.carrera }}</h6>
+                                        <h5>Carrera: </h5>
+                                        <h6>{{ alumno.grupo.carrera.nombre }}</h6>
                                     </div>
                                 </div>
                             </div>

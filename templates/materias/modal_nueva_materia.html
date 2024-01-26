@@ -1,0 +1,49 @@
+<div id="nueva_materia" class="modal fade" tabindex="-1" class="text-dark">
+    <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h3 class="modal-title fs-1" id="exampleModalLabel">Registro de materias</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <form action="{{ url_for('admin_materias') }}" method="POST" class="mb-3" enctype="multipart/form-data">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Carrera: </span>
+                    <select name="carrera_id" class="form-control" required>
+                        <option value="" disabled selected>Selecciona la carrera</option>
+                        {% for carrera in carreras %}
+                            <option value="{{ carrera.id }}">{{ carrera.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Cuatrimestre: </span>
+                    <select name="cuatrimestre_id" class="form-control" required>
+                        <option value="" disabled selected>Selecciona el cuatrimestre</option>
+                        {% for cuatrimestre in cuatrimestres %}
+                            <option value="{{ cuatrimestre.id }}">{{ cuatrimestre.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>                    
+
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Nombre de la materia: </span>
+                    <input name="nombre_materia" type="text" class="form-control" placeholder="nombre_materia del cuatrimestre" required>
+                  </div> 
+  
+                      <div class="row mt-3 justify-content-end">
+                          <div class="col-md-auto">
+                              <button class="btn btn-info" id="btnGuardar">Enviar</button>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                <i class="bi bi-arrow-90deg-left"></i> Regresar
+                              </button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+    </div>
+  </div>

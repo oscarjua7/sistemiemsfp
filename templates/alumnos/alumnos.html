@@ -54,7 +54,7 @@
                 <a href="{{ url_for('docentes') }}">Docentes</a>
               </li>
               <li>
-                <a href="{{ url_for('docentes') }}">Personal administrativo</a>
+                <a href="{{ url_for('personal_administrativo') }}">Personal administrativo</a>
               </li>
             </ul>
       </li>
@@ -67,31 +67,39 @@
                 <a href="{{ url_for('admin_carreras') }}">Carreras</a>
               </li>
               <li>
+                <a href="{{ url_for('admin_cuatrimestres') }}">Cuatrimestres</a>
+              </li>
+              <li>
                 <a href="{{ url_for('admin_grupos') }}">Grupos</a>
               </li>
-              <li>
-                <a href="#">Periodos</a>
-              </li>
-              <li>
-                <a href="#">Ciclos escolares</a>
-              </li>
             </ul>
+      </li>
       <li class="dropdown">
         <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+          <i class="material-icons">format_list_numbered</i><span>Materias</span>
+        </a>
+            <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+              <li>
+                <a href="{{ url_for('admin_materias') }}">Lista de materias</a>
+              </li>
+            </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
           <i class="material-icons">donut_small</i><span>Reportes</span>
         </a>
-        <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+        <ul class="collapse list-unstyled menu" id="pageSubmenu4">
           <li>
             <a href="{{ url_for('reportes') }}">Reporte de estatus</a>
-            <a href="#">Reporte alumnos por sexo</a>
+            <a href="{{ url_for('reportes_sexo') }}">Reporte alumnos por sexo</a>
           </li>
         </ul>
       </li>
       <li class="dropdown">
-        <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
           <i class="material-icons">border_color</i><span>Usuarios</span>
         </a>
-          <ul class="collapse list-unstyled menu" id="pageSubmenu4">
+          <ul class="collapse list-unstyled menu" id="pageSubmenu5">
             <li>
               <a href="{{ url_for('form_usuarios') }}">Administrar Usuarios</a>
             </li>
@@ -105,9 +113,7 @@
             <div class="xp-topbar">
                 <div class="row">
                 <!-- Start XP Col -->
-                <div
-                    class="col-2 col-md-1 col-lg-1 order-2 order-md-1 align-self-center"
-                >
+                <div class="col-2 col-md-1 col-lg-1 order-2 order-md-1 align-self-center" >
                     <div class="xp-menubar">
                     <span class="material-icons text-white"
                         >signal_cellular_alt
@@ -139,18 +145,6 @@
                             </a>
                             <ul class="dropdown-menu small-menu">
                             <li>
-                                <a href="#">
-                                <span class="material-icons">person_outline</span
-                                >Perfil
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                ><span class="material-icons">settings</span
-                                >Configuración</a
-                                >
-                            </li>
-                            <li>
                                 <a href="{{ url_for('logout') }}"
                                 ><span class="material-icons">logout</span>Cerrar
                                 sesión</a
@@ -167,10 +161,11 @@
                 <!-- End XP Row -->
             </div>
         </div>
+
         <div class="container">
             <div class="row mt-4">
                 <div class="col-md-4">
-                    <form action="/alumnos" method="get" class="d-flex" id="myForm">
+                    <form action="/alumnos" method="get" class="d-flex" id="form_alumnos">
                       <label for="recordsPerPage" class="mt-1 mr-2 align-self-center">Mostrar:</label>
                       <select class="form-control" name="records" id="recordsPerPage">
                         <option value="4">4 registros</option>
@@ -191,9 +186,9 @@
                         </div>
                     </div>
                 </div>
-              <div class="container mt-4">
-                  {% include 'alerts.html' %} 
-              </div>
+                <div class="container mt-4">
+                    {% include 'alerts.html' %} 
+                </div>
             </div>
         </div>
       
@@ -224,7 +219,7 @@
                   <table class="table table-striped table-hover">
                     <thead>
                         <th colspan="3" class="font-weight-bold">Nombre</th>
-                        <th class="font-weight-bold">Estatus</th>
+                        <th class="font-weight-bold text-center">Estatus</th>
                         <th class="font-weight-bold">Folio</th>
                         <th class="font-weight-bold">Carrera</th>
                         <th class="font-weight-bold">Fecha de inscripción</th>
@@ -234,21 +229,19 @@
                       {%for alumno in alumnos %}
                       <tr>
                         <td colspan="3">{{alumno.nombre}}</td>
-                        <td>
-                          <p>
-                            {% if alumno.estatus == 0 %}
-                              <span class="badge text-bg-success">Titulado</span>
-                            {% elif alumno.estatus == 1 %}
-                              <span class="badge text-bg-warning">Seguimiento</span>
-                            {% elif alumno.estatus == 2 %}
-                              <span class="badge text-bg-danger">No titulado</span>
-                            {% else %}
-                              <span class="badge text-bg-secondary">Pendiente</span>
-                            {% endif %}
-                          </p>
+                        <td class="text-center">
+                          {% if alumno.estatus == 0 %}
+                            <h6 class="badge bg-success text-light" style="font-size: 14px;">Activo</h6>
+                          {% elif alumno.estatus == 1 %}
+                            <h6 class="badge bg-warning text-light" style="font-size: 14px;">Pendiente</h6>
+                          {% elif alumno.estatus == 2 %}
+                            <h6 class="badge bg-danger text-light" style="font-size: 14px;">Baja</h6>
+                          {% else %}
+                            <h6 class="badge bg-secondary text-light" style="font-size: 14px;">Graduado</h6>
+                          {% endif %}
                         </td>
                         <td>{{alumno.folio}}</td>
-                        <td>{{alumno.carrera}}</td>
+                        <td>{{alumno.grupo.carrera.nombre}}</td>
                         <td>{{alumno.fecha_inscripcion}}</td>
                         <td>
       

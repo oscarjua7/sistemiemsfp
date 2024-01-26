@@ -1,0 +1,48 @@
+<div class="col-md-12">
+    <div class="container">
+        <div class="row">
+            {% for carrera in carreras %}
+                <div class="col-md-12 mb-3">
+                    <div id="accordionCarrera{{ carrera.id }}">
+                        <div class="card">
+                            <div class="card-header" id="headingCarrera{{ carrera.id }}">
+                                <h5 class="mb-0">
+                                    <a class="btn btn-link" data-toggle="collapse" href="#collapseCarrera{{ carrera.id }}" aria-expanded="false" aria-controls="collapseCarrera{{ carrera.id }}">
+                                        {{ carrera.nombre }}
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseCarrera{{ carrera.id }}" class="collapse" aria-labelledby="headingCarrera{{ carrera.id }}" data-parent="#accordionCarrera{{ carrera.id }}">
+                                <div class="card-body">
+                                    <div id="accordionCuatrimestres{{ carrera.id }}">
+                                        {% for cuatrimestre in cuatrimestres %}
+                                                <div class="card">
+                                                    <div class="card-header" id="headingCuatrimestre{{ cuatrimestre.id }}Carrera{{ carrera.id }}">
+                                                        <h2 class="mb-0">
+                                                            <a class="btn btn-link" data-toggle="collapse" href="#collapseCuatrimestre{{ cuatrimestre.id }}Carrera{{ carrera.id }}" aria-expanded="false" aria-controls="collapseCuatrimestre{{ cuatrimestre.id }}Carrera{{ carrera.id }}">
+                                                                {{ cuatrimestre.nombre }}
+                                                            </a>
+                                                        </h2>
+                                                    </div>
+                                                    <div id="collapseCuatrimestre{{ cuatrimestre.id }}Carrera{{ carrera.id }}" class="collapse" aria-labelledby="headingCuatrimestre{{ cuatrimestre.id }}Carrera{{ carrera.id }}" data-parent="#accordionCuatrimestres{{ carrera.id }}">
+                                                        <div class="card-body">
+                                                            Administración I<br>                                                            Fundamentos de economía 
+                                                            Conceptos jurídicos Fundamentales<br>
+                                                            Entorno en las organizaciones<br>
+                                                            Introducción a la contabilidad<br>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% include 'materias/eliminar-materia-modal.html' %}
+{% include 'materias/actualizar-materia-modal.html' %}

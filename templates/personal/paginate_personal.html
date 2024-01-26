@@ -1,0 +1,22 @@
+<nav class="text-center">
+    <div class="col-md-auto">
+        <small>Pagina {{ page_personal }} de {{ pages_count_personal }}</small>
+    </div>
+    <div class="col-md-auto">
+        <ul class="pagination justify-content-center">
+            {% if page_personal > 1 %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('personal_administrativo', page_personal=page_personal - 1, records=request.args.get('records', 4)) }}{% for arg in args_personal.keys() %}{% if arg != 'page_personal' and arg != 'include' and args_personal[arg] != '' %}&{{ arg }}={{ args_personal[arg] }}{% endif %}{% endfor %}">Anterior</a></li>
+            {% endif %}
+            {% for i in range(pages_count_personal) %}
+                <li class="page-item {% if page_personal == i+1 %} active {% endif %}">
+                    <a class="page-link" href="{{ url_for('personal_administrativo', page_personal=i+1, records=request.args.get('records', 4)) }}{% for arg in args_personal.keys() %}{% if arg != 'page_personal' and arg != 'include' and args_personal[arg] != '' %}&{{ arg }}={{ args_personal[arg] }}{% endif %}{% endfor %}">
+                        {{ i+1 }}
+                    </a>
+                </li>
+            {% endfor %}
+            {% if page_personal < pages_count_personal %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('personal_administrativo', page_personal=page_personal + 1, records=request.args.get('records', 4)) }}{% for arg in args_personal.keys() %}{% if arg != 'page_personal' and arg != 'include' and args_personal[arg] != '' %}&{{ arg }}={{ args_personal[arg] }}{% endif %}{% endfor %}">Siguiente</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

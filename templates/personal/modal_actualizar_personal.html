@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar personal</h1>
+                <h2 class="modal-title fs-5" id="exampleModalLabel">Actualizar personal</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -11,35 +11,36 @@
                 <form action="{{ url_for('update_personal', id=personal.id) }}" method="post" enctype="multipart/form-data">
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="n_nombre_personal">Nombre del personal: </span>
-                        <input type="text" name="n_nombre_personal" id="n_nombre_personal" class="form-control" placeholder="{{ personal.nombre }}"
+                        <input type="text" name="n_nombre_personal" id="n_nombre_personal" class="form-control" value="{{ personal.nombre }}"
                         />
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="n_folio_personal">Folio: </span>
-                        <input type="text" name="n_folio_personal" id="n_folio_personal" class="form-control" placeholder="{{ personal.folio }}"
+                        <input type="text" name="n_folio_personal" id="n_folio_personal" class="form-control" value="{{ personal.folio }}"
                         />
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="n_telefono_personal" class="form-control">Teléfono: </span>
-                        <input type="text" class="form-control" id="n_telefono_personal" name="n_telefono_personal" rows="3" style="resize: none" placeholder="{{ personal.telefono }}"
+                        <input type="text" class="form-control" id="n_telefono_personal" name="n_telefono_personal" rows="3" style="resize: none" value="{{ personal.telefono }}"
                         />
                         <span class="input-group-text" for="n_correo_personal" class="form-control">Correo: </span>
-                        <input type="text" class="form-control" id="n_correo_personal" name="n_correo_personal" rows="3" style="resize: none" placeholder="{{ personal.correo }}"
+                        <input type="text" class="form-control" id="n_correo_personal" name="n_correo_personal" rows="3" style="resize: none" value="{{ personal.correo }}"
                         />
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" for="n_periodo_contrato_personal">Periodo de contrato: </span>
-                        <input type="text" name="n_periodo_contrato_personal" id="n_periodo_contrato_personal" class="form-control" rows="3" style="resize: none" placeholder="{{ personal.periodocontrato }}"
-                        />
+                        <span class="input-group-text" for="n_fecha_inicio">Inicio de contrato: </span>
+                        <input type="date" name="n_fecha_inicio" id="n_fecha_inicio" class="form-control" style="resize: none" value="{{ personal.periodocontratoini.strftime('%Y-%m-%d') }}" required/>
+                        <span class="input-group-text" for="n_fecha_fin">Fin de contrato: </span>
+                        <input type="date" name="n_fecha_fin" id="n_fecha_fin" class="form-control" style="resize: none" value="{{ personal.periodocontratofin.strftime('%Y-%m-%d') }}" required/>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="n_puesto_personal">Puesto: </span>
-                        <input type="text" name="n_puesto_personal" id="n_puesto_personal" class="form-control" placeholder="{{ personal.puesto }}"
+                        <input type="text" name="n_puesto_personal" id="n_puesto_personal" class="form-control" value="{{ personal.puesto }}"
                         />
                     </div>
                     <div class="mb-3">
                         <span class="input-group-text" for="n_domicilio_personal">Domicilio: </span>
-                        <textarea class="form-control" id="n_domicilio_personal" name="n_domicilio_personal" rows="3" style="resize: none" placeholder="{{ personal.domicilio }}"
+                        <textarea class="form-control" id="n_domicilio_personal" name="n_domicilio_personal" rows="3" style="resize: none" value="{{ personal.domicilio }}"
                         ></textarea>
                     </div>
                     <div class="row mt-3 justify-content-end">

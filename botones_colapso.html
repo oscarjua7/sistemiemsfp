@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Botones de Colapso con Bootstrap</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Ejemplos de Botones de Colapso con Bootstrap</h2>
+
+    <!-- Botón de Colapso por Defecto -->
+    <div class="mb-3">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#colapso1" aria-expanded="false" aria-controls="colapso1">
+            Botón de Colapso por Defecto
+        </button>
+        <div class="collapse" id="colapso1">
+            <div class="card card-body">
+                Contenido del Colapso 1...
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de Colapso Secundario -->
+    <div class="mb-3">
+        <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#colapso2" aria-expanded="false" aria-controls="colapso2">
+            Botón de Colapso Secundario
+        </button>
+        <div class="collapse" id="colapso2">
+            <div class="card card-body">
+                Contenido del Colapso 2...
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de Colapso de Contorno -->
+    <div class="mb-3">
+        <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target="#colapso3" aria-expanded="false" aria-controls="colapso3">
+            Botón de Colapso de Contorno
+        </button>
+        <div class="collapse" id="colapso3">
+            <div class="card card-body">
+                Contenido del Colapso 3...
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de Colapso con Icono -->
+    <div class="mb-3">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#colapso4" aria-expanded="false" aria-controls="colapso4">
+            <i class="bi bi-arrow-down-circle"></i> Botón de Colapso con Icono
+        </button>
+        <div class="collapse" id="colapso4">
+            <div class="card card-body">
+                Contenido del Colapso 4...
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de Colapso con Tamaño -->
+    <div class="mb-3">
+        <button class="btn btn-primary btn-lg" type="button" data-toggle="collapse" data-target="#colapso5" aria-expanded="false" aria-controls="colapso5">
+            Botón de Colapso Grande
+        </button>
+        <div class="collapse" id="colapso5">
+            <div class="card card-body">
+                Contenido del Colapso 5...
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de Colapso con Estado Activo -->
+    <div class="mb-3">
+        <button class="btn btn-primary active" type="button" data-toggle="collapse" data-target="#colapso6" aria-expanded="false" aria-controls="colapso6">
+            Botón de Colapso Activo
+        </button>
+        <div class="collapse" id="colapso6">
+            <div class="card card-body">
+                Contenido del Colapso 6...
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

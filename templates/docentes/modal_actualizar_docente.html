@@ -11,36 +11,37 @@
                 <form action="{{ url_for('update_docente', id=docente.id) }}" method="post" enctype="multipart/form-data">
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="n_nombre_docente">Nombre del docente: </span>
-                        <input type="text" name="n_nombre_docente" id="n_nombre_docente" class="form-control" placeholder="{{ docente.nombre }}"
+                        <input type="text" name="n_nombre_docente" id="n_nombre_docente" class="form-control" value="{{ docente.nombre }}"
                         />
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="n_folio_docente">Folio: </span>
-                        <input type="text" name="n_folio_docente" id="n_folio_docente" class="form-control" placeholder="{{ docente.folio }}"
+                        <input type="text" name="n_folio_docente" id="n_folio_docente" class="form-control" value="{{ docente.folio }}"
                         />
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="n_telefono_docente" class="form-control">Teléfono: </span>
-                        <input type="text" class="form-control" id="n_telefono_docente" name="n_telefono_docente" rows="3" style="resize: none" placeholder="{{ docente.telefono }}"
+                        <input type="text" class="form-control" id="n_telefono_docente" name="n_telefono_docente" rows="3" style="resize: none" value="{{ docente.telefono }}"
                         />
                         <span class="input-group-text" for="n_correo_docente" class="form-control">Correo: </span>
-                        <input type="text" class="form-control" id="n_correo_docente" name="n_correo_docente" rows="3" style="resize: none" placeholder="{{ docente.correo }}"
+                        <input type="text" class="form-control" id="n_correo_docente" name="n_correo_docente" rows="3" style="resize: none" value="{{ docente.correo }}"
                         />
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" for="n_periodo_contrato_docente">Fecha de inscripción: </span>
-                        <input type="text" name="n_periodo_contrato_docente" id="n_periodo_contrato_docente" class="form-control" rows="3" style="resize: none" date="{{ docente.fecha_inscripcion }}"
-                        />
+                        <span class="input-group-text" for="n_fecha_inicio">Inicio de contrato: </span>
+                        <input type="date" name="n_fecha_inicio" id="n_fecha_inicio" class="form-control" style="resize: none" value="{{ docente.periodocontratoini.strftime('%Y-%m-%d') }}" required/>
+                        <span class="input-group-text" for="n_fecha_fin">Fin de contrato: </span>
+                        <input type="date" name="n_fecha_fin" id="n_fecha_fin" class="form-control" style="resize: none" value="{{ docente.periodocontratofin.strftime('%Y-%m-%d') }}" required/>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="n_carrera_docente">Carrera: </span>
-                        <input type="text" name="n_carrera_docente" id="n_carrera_docente" class="form-control" placeholder="{{ docente.carrera }}"
+                        <input type="text" name="n_carrera_docente" id="n_carrera_docente" class="form-control" value="{{ docente.carrera }}"
                         />
                     </div>
                     <div class="mb-3">
                         <span class="input-group-text" for="n_domicilio_docente">Domicilio: </span>
-                        <textarea class="form-control" id="n_domicilio_docente" name="n_domicilio_docente" rows="3" style="resize: none" placeholder="{{ docente.domicilio }}"
-                        ></textarea>
+                        <textarea class="form-control" id="n_domicilio_docente" name="n_domicilio_docente" rows="3" style="resize: none"
+                        >{{ docente.domicilio }}"</textarea>
                     </div>
                     <div class="row mt-3 justify-content-end">
                         <div class="col-md-auto">

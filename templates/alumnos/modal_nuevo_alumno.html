@@ -10,48 +10,125 @@
             <div class="modal-body">
                 <form action="{{url_for ('post_alumnos')}}" method="POST" enctype="multipart/form-data">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" for="nombre_alumno">Nombre del alumno: </span>
+                        <span class="input-group-text campo-validar" for="nombre_alumno">Nombre del alumno: </span>
                         <input type="text" name="nombre_alumno" id="nombre_alumno" class="form-control" required/>
+                        <!-- Contenedor para el mensaje de advertencia -->
+                        <div id="mensajeNombre" class="text-danger"></div>
                     </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" for="curp_alumno">CURP: </span>
-                        <input type="text" name="curp_alumno" id="curp_alumno" class="form-control" required/>
-                        <span class="input-group-text" for="folio_alumno">Folio: </span>
-                        <input type="text" name="folio_alumno" id="folio_alumno" class="form-control" required/>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text" for="curp_alumno">CURP: </span>
+                                <!-- Agrega el atributo maxlength para limitar a 18 caracteres -->
+                                <input type="text" name="curp_alumno" id="curp_alumno" class="form-control" required maxlength="18"/>
+                            </div>
+                            <div class="mensaje-error mt-2">
+                                <div id="mensajeCurp" class="text-danger"></div>
+                            </div>
+                            <!-- Agrega un div para mostrar el mensaje de validación -->
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text" for="folio_alumno">Folio: </span>
+                                <!-- Agrega el atributo maxlength para limitar a 7 caracteres -->
+                                <input type="text" name="folio_alumno" id="folio_alumno" class="form-control" required maxlength="7"/>
+                            </div>
+                            <div class="mensaje-error mt-2">
+                                <div id="mensajeFolio" class="text-danger"></div>
+                            </div>
+                            <!-- Agrega un div para mostrar el mensaje de validación -->
+                        </div>
+                    </div>                    
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text" for="telefono_alumno">Teléfono: </span>
+                                <!-- Agrega el atributo maxlength para limitar a 18 caracteres -->
+                                <input type="text" class="form-control" id="telefono_alumno" name="telefono_alumno" required maxlength="10"/>
+                            </div>
+                            <div class="mensaje-error mt-2">
+                                <div id="mensajeTelefono" class="text-danger"></div>
+                            </div>
+                            <!-- Agrega el atributo maxlength para limitar a 10 caracteres -->
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text" for="correo_alumno">Correo: </span>
+                                <!-- Agrega el atributo maxlength para limitar a 10 caracteres -->
+                                <input type="text" class="form-control" id="correo_alumno" name="correo_alumno" required maxlength="50"/>
+                            </div>
+                            <div class="mensaje-error mt-2">
+                                <div id="mensajeCorreo" class="text-danger"></div>
+                            </div>
+                            <!-- Agrega un div para mostrar el mensaje de validación -->
+                        </div>
+                    </div> 
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text" for="estatus_alumno">Estatus: </span>
+                                <select name="estatus_alumno" id="estatus_alumno" class="form-control">
+                                    <option value="" disabled selected>Selecciona el estatus</option>
+                                    <option value="0">Activo</option>
+                                    <option value="1">Pendiente</option>
+                                    <option value="2">Baja</option>
+                                    <option value="3">Graduado</option>
+                                </select>
+                            </div>
+                    
+                            <!-- Nuevo div para contener el mensaje de error del estatus -->
+                            <div class="mensaje-error mt-2">
+                                <div id="mensajeEstatus" class="text-danger"></div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text" for="fecha_inscripcion">Fecha de inscripción: </span>
+                                <input type="date" name="fecha_inscripcion" id="fecha_inscripcion" class="form-control" style="resize: none" required/>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" for="telefono_alumno" class="form-control">Teléfono: </span>
-                        <input type="text" class="form-control" id="telefono_alumno" name="telefono_alumno" rows="3" style="resize: none" required/>
-                        <span class="input-group-text" for="correo_alumno" class="form-control">Correo: </span>
-                        <input type="text" class="form-control" id="correo_alumno" name="correo_alumno" rows="3" style="resize: none" required/>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text">Grupo: </span>
+                                <select name="grupo_id" class="form-control" required>
+                                    <option value="" disabled selected>Selecciona el grupo</option>
+                                        {% for grupo in grupos %}
+                                            <option value="{{ grupo.id }}">{{ grupo.clave }}</option>
+                                        {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text" for="sexo_alumno">Sexo: </span>
+                                <select name="sexo_alumno" id="sexo_alumno" class="form-control form-select-sm">
+                                    <option value="" disabled selected>Selecciona el sexo</option>
+                                    <option value="0">Femenino</option>
+                                    <option value="1">Masculino</option>
+                                </select>
+                            </div>
+                    
+                            <!-- Nuevo div para contener el mensaje de error del sexo -->
+                            <div class="mensaje-error mt-2">
+                                <div id="mensajeSexo" class="text-danger"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" for="estatus_alumno">Estatus: </span>
-                        <select name="estatus_alumno" id="estatus_alumno" class="form-control">
-                          <option value="0">Activo</option>
-                          <option value="1">Pendiente</option>
-                          <option value="2">Baja</option>
-                          <option value="3">Graduado</option>
-                        </select>
-                        <span class="input-group-text" for="fecha_inscripcion">Fecha de inscripción: </span>
-                        <input type="date" name="fecha_inscripcion" id="fecha_inscripcion" class="form-control" rows="3" style="resize: none" required/>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" for="carrera_alumno">Carrera: </span>
-                        <input type="text" name="carrera_alumno" id="carrera_alumno" class="form-control" required/>
-                        <span class="input-group-text" for="sexo_alumno">Sexo: </span>
-                        <select name="sexo_alumno" id="sexo_alumno" class="form-control form-select-sm">
-                          <option value="0">Femenino</option>
-                          <option value="1">Masculino</option>
-                        </select>
-                    </div>
+                    
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="domicilio_alumno">Domicilio: </span>
                         <textarea class="form-control" id="domicilio_alumno" name="domicilio_alumno" rows="3" style="resize: none"></textarea>
                     </div>
                     <div class="row mt-3 justify-content-end">
                         <div class="col-md-auto">
-                            <button class="btn btn-info">Enviar</button>
+                            <button class="btn btn-info" id="btnGuardar">Enviar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                               <i class="bi bi-arrow-90deg-left"></i> Regresar
                             </button>

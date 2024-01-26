@@ -46,7 +46,7 @@
           <!-- Start XP Col -->
           <div class="col-md-8 col-lg-8 order-3 order-md-2">
             <div class="justify-content-center xp-breadcrumbbar text-center">
-              <h4 class="page-title">Consulta general de docentes</h4>
+              <span class="page-title">Consulta general de docentes</span>
               <ol class="breadcrumb"></ol>
             </div>
           </div>
@@ -69,18 +69,6 @@
                     </a>
                     <ul class="dropdown-menu small-menu">
                       <li>
-                        <a href="#">
-                          <span class="material-icons">person_outline</span
-                          >Perfil
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#"
-                          ><span class="material-icons">settings</span
-                          >Configuración</a
-                        >
-                      </li>
-                      <li>
                         <a href="{{ url_for('logout') }}"
                           ><span class="material-icons">logout</span>Cerrar
                           sesión</a
@@ -101,22 +89,34 @@
   </div>
 
   <div class="container">
-    <div class="row justify-content-center mt-4">
-        <div class="col-lg-9">
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <form action="/docentes" method="get" class="d-flex" id="form_docentes">
+              <label for="recordsPerPage" class="mt-1 mr-2 align-self-center">Mostrar:</label>
+              <select class="form-control" name="records" id="recordsPerPage">
+                <option value="4">4 registros</option>
+                <option value="7">7 registros</option>
+                <option value="10">10 registros</option>
+                <option value="15">15 registros</option>
+              </select>
+              <input type="submit" class="btn btn-primary" value="Elegir">
+            </form>
+        </div>
+        <div class="col-md-8">
             <div class="xp-searchbar">
                 <div class="input-group">
-                    <input type="text" id="search-input" class="form-control placeholder" placeholder="Escribe el folio que deseas buscar">
+                    <input type="text" id="search-input" class="form-control placeholder" placeholder="Escribe el nombre o folio que deseas buscar">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit">BUSCAR</button>
                     </div>
                 </div>
             </div>
-            <div class="container mt-4">
-              {% include 'alerts.html' %} 
-            </div>
         </div>
+      <div class="container mt-4">
+          {% include 'alerts.html' %} 
+      </div>
     </div>
-  </div>
+</div>
 
     <div class="main-content">
       <div class="row">
@@ -125,7 +125,7 @@
             <div class="table-title">
               <div class="row">
                 <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
-                  <h2 class="ml-lg-2">Docentes</h2>
+                  <h2 class="ml-lg-2">Lista general de docentes</h2>
                 </div>
 
                 <div class="col-sm-6 p-0 d-flex justify-content-lg-end justify-content-center">
@@ -143,7 +143,7 @@
                   <th colspan="3" class="font-weight-bold">Nombre</th>
                   <th class="font-weight-bold">Folio</th>
                   <th class="font-weight-bold">Carrera</th>
-                  <th class="font-weight-bold">Periodo de contrato</th>
+                  <th colspan="3" class="font-weight-bold">Periodo de contrato</th>
                   <th class="font-weight-bold">Información</th>
               </thead>
               <tbody>
@@ -152,9 +152,8 @@
                   <td colspan="3">{{docente.nombre}}</td>
                   <td>{{docente.folio}}</td>
                   <td>{{docente.carrera}}</td>
-                  <td>{{docente.periodocontrato}}</td>
+                  <td colspan="3"> Inicio: {{ docente.periodocontratoini.strftime('%Y-%m-%d') }} Termino: {{ docente.periodocontratofin.strftime('%Y-%m-%d') }}</td>
                   <td>
-
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-{{ docente.id }}">
                       Detalles
                     </button>
@@ -170,11 +169,11 @@
             
             <div class="clearfix">
               <div class="hint-text">
-                <p>Total de registros: <b> {{ total_records }} </b></p>
+                <p>Total de registros: <b> {{ total_records_docentes }} </b></p>
               </div>
               <div class="row justify-content-center">
                 <div class="col-md-auto">
-                    {% include 'paginate.html' %}
+                    {% include 'docentes/paginate_docentes.html' %}
                 </div>
               </div>
             </div>
@@ -185,8 +184,8 @@
         {% include 'docentes/modal_nuevo_docente.html' %}
         
       </div>
-      {% include 'footer.html' %}
     </div>
+    {% include 'footer.html' %}
   </div>
   {% endblock %}
 </div>

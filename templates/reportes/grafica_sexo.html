@@ -5,14 +5,14 @@
 {% block contenido%}
 <div class="wrapper">
   <!-- sidebar -->
-  <nav id="sidebar" class="d-print-none">
-    <div class="sidebar-header d-print-none">
+  <nav class="d-print-none" id="sidebar">
+    <div class="sidebar-header">
       <img
         src="{{ url_for('static', filename='img/logo.png') }}"
         class="img-fluid"
       />
     </div>
-    <ul class="list-unstyled components d-print-none">
+    <ul class="list-unstyled components">
       <li class="active">
         <a href="{{ url_for('panel_principal') }}" class="dashboard"
           ><i class="material-icons">dashboard</i>
@@ -30,7 +30,7 @@
                 <a href="{{ url_for('docentes') }}">Docentes</a>
               </li>
               <li>
-                <a href="{{ url_for('docentes') }}">Personal administrativo</a>
+                <a href="{{ url_for('personal_administrativo') }}">Personal administrativo</a>
               </li>
             </ul>
       </li>
@@ -43,31 +43,39 @@
                 <a href="{{ url_for('admin_carreras') }}">Carreras</a>
               </li>
               <li>
+                <a href="{{ url_for('admin_cuatrimestres') }}">Cuatrimestres</a>
+              </li>
+              <li>
                 <a href="{{ url_for('admin_grupos') }}">Grupos</a>
               </li>
-              <li>
-                <a href="#">Periodos</a>
-              </li>
-              <li>
-                <a href="#">Ciclos escolares</a>
-              </li>
             </ul>
+      </li>
       <li class="dropdown">
         <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+          <i class="material-icons">format_list_numbered</i><span>Materias</span>
+        </a>
+            <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+              <li>
+                <a href="{{ url_for('admin_materias') }}">Lista de materias</a>
+              </li>
+            </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
           <i class="material-icons">donut_small</i><span>Reportes</span>
         </a>
-        <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+        <ul class="collapse list-unstyled menu" id="pageSubmenu4">
           <li>
             <a href="{{ url_for('reportes') }}">Reporte de estatus</a>
-            <a href="#">Reporte alumnos por sexo</a>
+            <a href="{{ url_for('reportes_sexo') }}">Reporte alumnos por sexo</a>
           </li>
         </ul>
       </li>
       <li class="dropdown">
-        <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
           <i class="material-icons">border_color</i><span>Usuarios</span>
         </a>
-          <ul class="collapse list-unstyled menu" id="pageSubmenu4">
+          <ul class="collapse list-unstyled menu" id="pageSubmenu5">
             <li>
               <a href="{{ url_for('form_usuarios') }}">Administrar Usuarios</a>
             </li>
@@ -115,18 +123,6 @@
                             </a>
                             <ul class="dropdown-menu small-menu">
                             <li>
-                                <a href="#">
-                                <span class="material-icons">person_outline</span
-                                >Perfil
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                ><span class="material-icons">settings</span
-                                >Configuración</a
-                                >
-                            </li>
-                            <li>
                                 <a href="{{ url_for('logout') }}"
                                 ><span class="material-icons">logout</span>Cerrar
                                 sesión</a
@@ -148,7 +144,7 @@
           <div class="row justify-content-center ">
               <div class="col-md-10">
                   <div class="row justify-content-center">
-                      <div class="col-lg-8">
+                      <div class="col-lg-11">
                           <p class="d-print-none mt-2">
                               <button type="button" class="btn btn-primary" onClick="window.print()">
                                   <i class="bi bi-printer"></i> Imprimir
@@ -156,17 +152,42 @@
                           </p>
                       </div>
                   </div>
-                  <div class="row justify-content-center">
-                      <div class="col-lg-8">
-                          <h5 class="text-center mt-2">Reporte de alumnos por sexo</h5>
+                  <div class="container-fluid">
+                    <div class="row mt-3">
+                      <div class="col-12 d-flex justify-content-center">
+                        <img src="static/img/Logo.png" alt="Logo 1" class="img-fluid d-none d-print-block" style="width: 55%;">
                       </div>
+                    </div>
+                  </div>
+                  <div class="container-fluid">
+                    <div class="row mt-3 justify-content-center">
+                      <div class="col-md-12">
+                        <div class="col-md-12">
+                          <h2>Reporte de distribucion de sexo de alumnos</h2>
+                          </div>
+                          <div class="col-md-8">
+                            <h5>Instituto Ejecutivo Mexicano</h5>
+                          </div>
+                          <div class="col-md-10 d-flex align-items-center">
+                            <h5 class="mr-1">Fecha de reporte:</h5>
+                            <h5 class="fw-normal mb-0">{{ fecha_de_reporte }}</h5>
+                          </div>                        
+                          <div class="col-md-10 d-flex align-items-center">
+                            <h5 class="mr-1">Encargado(a) del area: </h5>
+                            <h5>Licenciada en Pedagogía Liliana Piña Segundo</h5>
+                          </div>
+                        
+                      </div>
+                  </div> 
                   </div>
                   <div class="row justify-content-center mt-3">
                       <div class="col-md-6">
                           <canvas id="egresados-pie-sexo"></canvas>
+                          <h6 class="text-center mt-2">La gráfica de pastel que se muestra anteriormente representa la distribución y el total de alumnos que contiene cada sexo, así como el porcentaje con el que cuentan.</h6>
                       </div>
                       <div class="col-md-6">
                           <canvas id="egresados-barra-sexo"></canvas>
+                          <h6 class="text-center mt-2">La gráfica de barras que se muestra anteriormente representa la distribución y el total de alumnos que contiene cada sexo.</h6>
                       </div>
                   </div>
                   <div class="container">

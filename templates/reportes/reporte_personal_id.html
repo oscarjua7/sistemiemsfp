@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block headers %}
+<title>Reporte del personal</title>
+{% endblock %}
+{% block contenido%}
+
+<div class="container-fluid">
+    <div class="row mt-3">
+    <div class="col-12 d-flex justify-content-center">
+        <img src="../../static/img/Logo.png"alt="Logo 1" class="img-fluid d-none d-print-block" style="width: 55%;">
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="row mt-3 justify-content-center d-print-none ">Visualización previa del documento</h2>
+            <h2 class=" mt-3 justify-content-center d-none d-print-block">Reporte de alumno: {{ personal.nombre }}</h2>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">   
+        <div class="row mt-3 justify-content-center">
+            <div class="col-md-12">
+                <p class="d-print-none">
+                    <button type="button" class="btn btn-primary mb-4" onClick="window.print()">
+                        <i class="bi bi-printer"></i>
+                        Imprimir
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Nombre</h5>
+                        <h6>{{ personal.nombre }}</h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Folio</h5>
+                        <h6>{{ personal.folio }}</h6>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Puesto</h5>
+                        <h6>{{ personal.puesto }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5><i class="bi bi-geo-alt-fill"></i> Domicilio</h5>
+                        <h6>
+                            <a href="https://www.google.com/maps/search/{{ personal.domicilio }}" target="_blank" class="modal-link">
+                                {{ personal.domicilio }} <i class="bi bi-box-arrow-up-right"></i>
+                            </a>
+                        </h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h5><i class="bi bi-envelope"></i> Correo</h5>
+                        <h6>
+                            <a href="mailto:{{ personal.correo }}" target="_blank" class="modal-link">
+                                    {{ personal.correo }}
+                                </a>
+                        </h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h5><i class="bi bi-telephone"></i> Telefono</h5>
+                        <h6>
+                                <a href="https://wa.me/{{ personal.telefono }}" target="_blank" class="modal-link">
+                                    {{ personal.telefono }}
+                                </a>
+                            </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Inicio de contrato: </h5>
+                        <h6>{{ personal.periodocontratoini.strftime('%Y-%m-%d') }} </h6>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Fin de contrato: </h5>
+                        <h6>{{ personal.periodocontratofin.strftime('%Y-%m-%d') }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-5">
+            <div class="row mt-5 d-none d-print-block justify-content-center">
+                <table class="table mt-5">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <hr class="w-25 mx-auto">
+                                <p class="text-center">
+                                    <b>Firma y sello de Control Escolar.</b>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

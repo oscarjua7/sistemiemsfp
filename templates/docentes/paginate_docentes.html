@@ -1,0 +1,18 @@
+<nav class="text-center">
+    <div class="col-md-auto">
+        <small>Pagina {{ page_docentes }} de {{ pages_count_docentes }}</small>
+    </div>
+    <div class="col-md-auto">
+        <ul class="pagination justify-content-center">
+            {% if page_docentes > 1 %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('docentes', page_docentes=page_docentes - 1, records=request.args.get('records', 4)) }}{% for arg in args_docentes.keys() %}{% if arg != 'page_docentes' and arg != 'include' and args_docentes[arg] != '' %}&{{ arg }}={{ args_docentes[arg] }}{% endif %}{% endfor %}">Anterior</a></li>
+            {% endif %}
+            {% for i in range(pages_count_docentes) %}
+                <li class="page-item {% if page_docentes == i+1 %} active {% endif %}"><a class="page-link" href="{{ url_for('docentes', page_docentes=i+1, records=request.args.get('records', 4)) }}{% for arg in args_docentes.keys() %}{% if arg != 'page_docentes' and arg != 'include' and args_docentes[arg] != '' %}&{{ arg }}={{ args_docentes[arg] }}{% endif %}{% endfor %}">{{ i+1 }}</a></li>
+            {% endfor %}
+            {% if page_docentes < pages_count_docentes %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('docentes', page_docentes=page_docentes + 1, records=request.args.get('records', 4)) }}{% for arg in args_docentes.keys() %}{% if arg != 'page_docentes' and arg != 'include' and args_docentes[arg] != '' %}&{{ arg }}={{ args_docentes[arg] }}{% endif %}{% endfor %}">Siguiente</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

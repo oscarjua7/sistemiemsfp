@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url_for('update_alumno', id=alumno.id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url_for('update_alumno', id=alumno.id) }}" method="POST" enctype="multipart/form-data">
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="n_nombre_alumno">Nombre del alumno: </span>
                         <input type="text" name="n_nombre_alumno" id="n_nombre_alumno" class="form-control" value="{{ alumno.nombre }}" required
@@ -33,19 +33,27 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text" for="n_estatus_alumno">Estatus: </span>
                         <select name="n_estatus_alumno" id="n_estatus_alumno" class="form-control">
-                          <option value="#">Eliga una opción</option>
-                          <option value="Activo" selected>Activo</option>
-                          <option value="Pendiente" selected>Pendiente</option>
-                          <option value="Baja" selected>Baja</option>
+                            <option value="0">Activo</option>
+                            <option value="1">Pendiente</option>
+                            <option value="2">Baja</option>
+                            <option value="3">Graduado</option>
                         </select>
                         <span class="input-group-text" for="n_fecha_inscripcion_alumno">Fecha de inscripción: </span>
                         <input type="date" name="n_fecha_inscripcion_alumno" id="n_fecha_inscripcion_alumno" class="form-control" rows="3" style="resize: none" value="{{ alumno.fecha_inscripcion }}" required
                         />
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" for="n_carrera_alumno">Carrera: </span>
-                        <input type="text" name="n_carrera_alumno" id="n_carrera_alumno" class="form-control" value="{{ alumno.carrera }}" required
-                        />
+                        <span class="input-group-text">Grupo: </span>
+                                <select name="n_grupo_id" class="form-control" required>
+                                        {% for grupo in grupos %}
+                                            <option value="{{ grupo.id }}">{{ grupo.clave }}</option>
+                                        {% endfor %}
+                                </select>
+                        <span class="input-group-text" for="n_sexo_alumno">Sexo: </span>
+                        <select name="n_sexo_alumno" id="n_sexo_alumno" class="form-control form-select-sm">
+                          <option value="0">Femenino</option>
+                          <option value="1">Masculino</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <span class="input-group-text" for="n_domicilio_alumno">Domicilio: </span>

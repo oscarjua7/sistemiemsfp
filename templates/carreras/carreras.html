@@ -1,7 +1,10 @@
-<div class="col-md-6">
+<div class="col-md-11">
     <form action="{{ url_for('admin_carreras') }}" method="post" class="mb-3">
         <div class="input-group mb-3">
-            <input name="nombre" type="text" class="form-control" placeholder="Nombre de la carrera" required>
+            <span class="input-group-text campo-validar" for="nombre">Nombre de la carrera: </span>
+            <input name="nombre" type="text" class="form-control"  required>
+            <span class="input-group-text campo-validar" for="rvoe">RVOE: </span>
+            <input name="rvoe" type="text" class="form-control"  required>
             <button class="btn btn-outline-primary" type="submit">Registrar <i class="bi bi-arrow-right"></i></button>
         </div>
     </form>
@@ -11,6 +14,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>RVOE</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -19,6 +23,7 @@
                     <tr>
                         <th scope="col">{{ carrera.id }}</th>
                         <td>{{ carrera.nombre }}</td>
+                        <td>RVOE{{ carrera.rvoe }}</td>
                         <td>
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#actualizar-carrera-modal-{{ carrera.id }}"><i class="bi bi-pencil"></i> Actualizar</button>
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#eliminar-carrera-modal-{{ carrera.id }}"><i class="bi bi-trash"></i> Eliminar</button>

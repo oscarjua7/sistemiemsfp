@@ -23,9 +23,48 @@
             }]
         },
         options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+            plugins: {
+                legend: {
+                    labels: {
+                        generateLabels: function(chart) {
+                            const data = chart.data;
+                            if (data.labels.length && data.datasets.length) {
+                                return data.labels.map(function(label, i) {
+                                    const meta = chart.getDatasetMeta(0);
+                                    const ds = data.datasets[0];
+                                    const arc = meta.data[i];
+                                    const value = ds.data[i];
+                                    const total = ds.data.reduce((acc, cur) => acc + cur, 0);
+                                    const percentage = ((value / total) * 100).toFixed(2);
+                                    const color = ds.backgroundColor[i];
+
+                                    return {
+                                        text: `${label}: ${value} (${percentage}%)`,
+                                        fillStyle: color,
+                                        strokeStyle: color,
+                                        lineWidth: 2,
+                                        hidden: isNaN(ds.data[i]) || meta.data[i].hidden,
+                                        index: i,
+                                        lineCap: 'butt',
+                                        lineDash: [],
+                                        lineDashOffset: 0.0,
+                                        lineJoin: 'bevel',
+                                        lineWidth: 3,
+                                        textAlign: 'center',
+                                        textBaseline: 'middle',
+                                        font: {
+                                            size: 12,
+                                            weight: 'bold'
+                                        },
+                                        x: arc.x,
+                                        y: arc.y
+                                    };
+                                });
+                            } else {
+                                return [];
+                            }
+                        }
+                    }
                 }
             }
         }

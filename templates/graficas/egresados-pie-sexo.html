@@ -13,15 +13,36 @@
                 ],
                 backgroundColor: [
                     'rgba(201, 203, 207, 0.8)',
-                    'rgba(255, 99, 132, 0.8)'
+                    'rgba(75, 192, 192, 0.8)'
                 ],
                 borderWidth: 1
             }]
         },
         options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+            plugins: {
+                legend: {
+                    labels: {
+                        generateLabels: function(chart) {
+                            const data = chart.data;
+                            if (data.labels.length && data.datasets.length) {
+                                return data.labels.map(function(label, i) {
+                                    const ds = data.datasets[0];
+                                    const value = ds.data[i];
+                                    const total = ds.data.reduce((acc, cur) => acc + cur, 0);
+                                    const percentage = ((value / total) * 100).toFixed(2);
+
+                                    return {
+                                        text: `${label}: ${value} (${percentage}%)`,
+                                        fillStyle: ds.backgroundColor[i],
+                                        hidden: isNaN(ds.data[i]),
+                                        index: i,
+                                    };
+                                });
+                            } else {
+                                return [];
+                            }
+                        }
+                    }
                 }
             }
         }

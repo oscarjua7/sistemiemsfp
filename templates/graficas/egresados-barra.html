@@ -27,7 +27,21 @@
                 y: {
                     beginAtZero: true
                 }
+            },
+            plugins: {
+                datalabels: {
+                    anchor: 'end',
+                    align: 'top',
+                    font: {
+                        weight: 'bold'
+                    },
+                    formatter: function(value, context) {
+                        console.log(value, context);
+                        const total = context.chart.data.datasets[0].data[context.dataIndex];
+                        return total > 0 ? total : '';
+                    }                    
+                }
             }
         }
-    });
+    });            
 </script>
